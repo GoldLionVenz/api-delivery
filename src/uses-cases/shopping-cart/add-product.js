@@ -6,7 +6,6 @@ export default function makeAddProductShoppingCart({ shoppingCartModel }) {
         user: user._id
       });
     }
-    return cart
     cart.items.push({
       product: productInfo.product,
       quantity: productInfo.quantity
