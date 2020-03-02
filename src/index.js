@@ -73,7 +73,7 @@ const httpServer = http.createServer(app);
 //const httpsServer = https.createServer(app);
 
 //httpsServer.listen(443);
-httpServer.listen(process.env.PORT);
+httpServer.listen(process.env.PORT || 3000);
 
 figlet(process.env.APP, function(err, data) {
   if (err) {
