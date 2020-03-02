@@ -12,7 +12,8 @@
     "dev": "./node_modules/.bin/nodemon --exec ./node_modules/.bin/babel-node src/index.js",
     "clean": "./node_modules/.bin/rimraf dist",
     "lint": "./node_modules/.bin/eslint src",
-    "lint:fix": "./node_modules/.bin/eslint src --fix"
+    "lint:fix": "./node_modules/.bin/eslint src --fix",
+    "rimraf": "./node_modules/rimraf/bin.js"
   },
   "keywords": [],
   "author": "",
