@@ -7,6 +7,7 @@
     "test": "jest ./dist/",
     "start": "npm run clean && npm run build && cd dist && node index.js",
     "build": "npm run clean && ./node_modules/.bin/babel src -d dist",
+    "postinstall": "npm run clean && ./node_modules/.bin/babel src -d dist",
     "wbuild": "./node_modules/.bin/babel src -d dist",
     "dev": "./node_modules/.bin/nodemon --exec ./node_modules/.bin/babel-node src/index.js",
     "clean": "./node_modules/.bin/rimraf dist",
