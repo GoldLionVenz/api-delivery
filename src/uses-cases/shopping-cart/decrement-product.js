@@ -1,35 +1,34 @@
-export default function makeAddProductShoppingCart({
+export default function makeDecrementProductShoppingCart({
   shoppingCartModel,
   productModel,
   getShoppingCartResponse
 }) {
-  return async function addProductShoppingCart({ user, ...productInfo } = {}) {
+  return async function decrementProductShoppingCart({
+    user,
+    ...productInfo
+  } = {}) {
     let cart = await shoppingCartModel.findOne({ user: user._id });
     if (!cart) {
       cart = await shoppingCartModel.create({
         user: user._id
       });
     }
-    const product = await productModel.findOne({_id:productInfo.product});
-    if(!product){
-      throw { message: 'product not found' };
+    const product = await productModel.findOne({ _id: productInfo.product });
+    if (!product) {
+      throw { message: "product not found" };
     }
 
     const productFind = cart.items.find(
       item => item.product == productInfo.product
     );
     if (!productFind) {
-      cart.items.push({
-        product: productInfo.product,
-        quantity: productInfo.quantity
-      });
-      await cart.save();
+      throw { message: "product not found in shopping cart" };
     } else {
       await shoppingCartModel.updateOne(
         { user: user._id, "items.product": productInfo.product },
         {
           $set: {
-            "items.$.quantity": productFind.quantity + productInfo.quantity
+            "items.$.quantity": ++productFind.quantity
           }
         }
       );
@@ -40,7 +39,7 @@ export default function makeAddProductShoppingCart({
       .populate("items.product")
       .populate("user");
     return {
-      message: "Producto agregado",
+      message: "Producto incrementado",
       cart: getShoppingCartResponse(cart)
     };
   };
