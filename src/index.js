@@ -69,11 +69,16 @@ app.post(
   Auth,
   makeCallBack(shoppingCartController.getProductShoppingCart)
 );
+app.post(
+  "/api/v1/removeproductshoppingcart",
+  Auth,
+  makeCallBack(shoppingCartController.removeProductShoppingCart)
+);
 const httpServer = http.createServer(app);
 //const httpsServer = https.createServer(app);
 
 //httpsServer.listen(443);
-httpServer.listen(process.env.PORT || 3000);
+httpServer.listen(process.env.PORT || 8000);
 
 figlet(process.env.APP, function(err, data) {
   if (err) {

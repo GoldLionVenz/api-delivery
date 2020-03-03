@@ -1,16 +1,25 @@
 import makeAddProductShoppingCart from "./add-product";
 import makeGetProductShoppingCart from "./get-shopping-cart";
-import { shoppingCartModel } from "../../models";
-
+import makeRemoveProductShoppingCart from "./remove-item";
+import { shoppingCartModel, productModel } from "../../models";
+import { getShoppingCartResponse } from "../../helpers";
 const addProductShoppingCart = makeAddProductShoppingCart({
-  shoppingCartModel
+  shoppingCartModel,
+  productModel,
+  getShoppingCartResponse
 });
 const getProductShoppingCart = makeGetProductShoppingCart({
-  shoppingCartModel
+  shoppingCartModel,
+  getShoppingCartResponse
+});
+const removeProductShoppingCart = makeRemoveProductShoppingCart ({
+  shoppingCartModel,
+  getShoppingCartResponse
 });
 const shoppingCartServices = Object.freeze({
   addProductShoppingCart,
-  getProductShoppingCart
+  getProductShoppingCart,
+  removeProductShoppingCart
 });
 
 export default shoppingCartServices;

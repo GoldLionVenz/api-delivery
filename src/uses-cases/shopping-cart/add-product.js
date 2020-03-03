@@ -1,25 +1,47 @@
-export default function makeAddProductShoppingCart({ shoppingCartModel }) {
+export default function makeAddProductShoppingCart({
+  shoppingCartModel,
+  productModel,
+  getShoppingCartResponse
+}) {
   return async function addProductShoppingCart({ user, ...productInfo } = {}) {
-    let cart = await shoppingCartModel.findOne({ user: user._id }).populate('items.product').populate('user')
+    let cart = await shoppingCartModel.findOne({ user: user._id });
     if (!cart) {
       cart = await shoppingCartModel.create({
         user: user._id
       });
     }
-    cart.items.push({
-      product: productInfo.product,
-      quantity: productInfo.quantity
-    });
+    //const product = await productModel.findOne({_id:productInfo.product});
+    //if(!product){
+    //  throw { message: 'product not found' };
+    //}
 
-    cart.save(function (err) {
-        if(err){
-            throw { message: 'err' };
+    const productFind = cart.items.find(
+      item => item.product == productInfo.product
+    );
+    if (!productFind) {
+      cart.items.push({
+        product: productInfo.product,
+        quantity: productInfo.quantity
+      });
+      await cart.save();
+    } else {
+      await shoppingCartModel.updateOne(
+        { user: user._id, "items.product": productInfo.product },
+        {
+          $set: {
+            "items.$.quantity": productFind.quantity + productInfo.quantity
+          }
         }
-        console.log('aqui')
-    })
+      );
+    }
 
+    cart = await shoppingCartModel
+      .findOne({ user: user._id })
+      .populate("items.product")
+      .populate("user");
     return {
-      message: "Producto agregado "
+      message: "Producto agregado",
+      cart: getShoppingCartResponse(cart)
     };
   };
 }

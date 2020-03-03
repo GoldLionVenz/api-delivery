@@ -1,4 +1,7 @@
-export default function makeGetProductShoppingCart({ shoppingCartModel }) {
+export default function makeGetProductShoppingCart({
+  shoppingCartModel,
+  getShoppingCartResponse
+}) {
   return async function getShoppingCart({ user } = {}) {
     const cart = await shoppingCartModel
       .findOne({ user: user._id })
@@ -6,6 +9,6 @@ export default function makeGetProductShoppingCart({ shoppingCartModel }) {
     if (!cart) {
       throw { message: "shooping cart not found" };
     }
-    return cart;
+    return getShoppingCartResponse(cart);
   };
 }

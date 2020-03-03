@@ -1,5 +1,6 @@
 import makeAddProductShoppingCart from "./add-product";
 import makeGetProductShoppingCart from "./get-shopping-cart";
+import makeRemoveProductShoppingCart from "./remove-product";
 import { shoppingCartServices } from "../../uses-cases";
 
 const addProductShoppingCart = makeAddProductShoppingCart(
@@ -8,9 +9,13 @@ const addProductShoppingCart = makeAddProductShoppingCart(
 const getProductShoppingCart = makeGetProductShoppingCart(
   shoppingCartServices.getProductShoppingCart
 );
+const removeProductShoppingCart = makeRemoveProductShoppingCart(
+  shoppingCartServices.removeProductShoppingCart
+);
 const shoppingCartController = {
   addProductShoppingCart,
-  getProductShoppingCart
+  getProductShoppingCart,
+  removeProductShoppingCart
 };
 
 export default shoppingCartController;
