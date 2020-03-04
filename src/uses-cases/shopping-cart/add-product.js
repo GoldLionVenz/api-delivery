@@ -36,13 +36,13 @@ export default function makeAddProductShoppingCart({
       );
     }
 
-    /*cart = await shoppingCartModel
+    cart = await shoppingCartModel
       .findOne({ user: user._id })
       .populate("items.product")
-      .populate("user");*/
+      .populate("user");
     return {
       message: "Producto agregado",
-      ///cart: getShoppingCartResponse(cart)
+      cart: getShoppingCartResponse(cart)
     };
   };
 }
