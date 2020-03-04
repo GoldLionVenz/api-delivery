@@ -1,28 +1,20 @@
 export default function makeIncrementProductShoppingCart({
     shoppingCartModel,
-    productModel,
     getShoppingCartResponse
   }) {
     return async function incrementProductShoppingCart({ user, ...productInfo } = {}) {
       let cart = await shoppingCartModel.findOne({ user: user._id });
       if (!cart) {
-        cart = await shoppingCartModel.create({
-          user: user._id
-        });
+        throw { message: "shooping cart not found" };
       }
-      const product = await productModel.findOne({_id:productInfo.product});
-      if(!product){
-        throw { message: 'product not found' };
-      }
-  
       const productFind = cart.items.find(
-        item => item.product == productInfo.product
+        item => item._id == productInfo.item
       );
       if (!productFind) {
         throw { message: 'product not found in shopping cart' };
       } else {
         await shoppingCartModel.updateOne(
-          { user: user._id, "items.product": productInfo.product },
+          { user: user._id, "items._id": productInfo.item },
           {
             $set: {
               "items.$.quantity": ++productFind.quantity

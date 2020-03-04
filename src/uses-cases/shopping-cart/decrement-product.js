@@ -1,6 +1,5 @@
 export default function makeDecrementProductShoppingCart({
   shoppingCartModel,
-  productModel,
   getShoppingCartResponse
 }) {
   return async function decrementProductShoppingCart({
@@ -9,29 +8,27 @@ export default function makeDecrementProductShoppingCart({
   } = {}) {
     let cart = await shoppingCartModel.findOne({ user: user._id });
     if (!cart) {
-      cart = await shoppingCartModel.create({
-        user: user._id
-      });
+      throw { message: "shooping cart not found" };
     }
-    const product = await productModel.findOne({ _id: productInfo.product });
-    if (!product) {
-      throw { message: "product not found" };
-    }
-
     const productFind = cart.items.find(
-      item => item.product == productInfo.product
+      item => item._id == productInfo.item
     );
     if (!productFind) {
       throw { message: "product not found in shopping cart" };
     } else {
-      await shoppingCartModel.updateOne(
-        { user: user._id, "items.product": productInfo.product },
-        {
-          $set: {
-            "items.$.quantity": ++productFind.quantity
+      if(productFind.quantity>1){
+        await shoppingCartModel.updateOne(
+          { user: user._id, "items._id": productInfo.item },
+          {
+            $set: {
+              "items.$.quantity": --productFind.quantity
+            }
           }
-        }
-      );
+        );
+      }else{
+        cart.items.pull({ _id: productInfo.item });
+        await cart.save();
+      }
     }
 
     cart = await shoppingCartModel
@@ -39,7 +36,7 @@ export default function makeDecrementProductShoppingCart({
       .populate("items.product")
       .populate("user");
     return {
-      message: "Producto incrementado",
+      message: "Producto decrementado",
       cart: getShoppingCartResponse(cart)
     };
   };

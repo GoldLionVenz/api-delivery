@@ -48,10 +48,10 @@ app.get("/api/v1/qr/:qr", function(req, res) {
     }
   });
 });
-app.get("/", (req,res)=>{
+app.get("/", (req, res) => {
   return res.send({
-    "message":"Bienvenido"
-  })
+    message: "Bienvenido"
+  });
 });
 app.post("/api/v1/register", makeCallBack(userController.addUser));
 app.post("/api/v1/login", makeCallBack(userController.loginUser));
@@ -73,6 +73,16 @@ app.post(
   "/api/v1/removeproductshoppingcart",
   Auth,
   makeCallBack(shoppingCartController.removeProductShoppingCart)
+);
+app.post(
+  "/api/v1/incrementproductshoppingcart",
+  Auth,
+  makeCallBack(shoppingCartController.incrementProductShoppingCart)
+);
+app.post(
+  "/api/v1/decrementproductshoppingcart",
+  Auth,
+  makeCallBack(shoppingCartController.decrementProductShoppingCart)
 );
 const httpServer = http.createServer(app);
 //const httpsServer = https.createServer(app);

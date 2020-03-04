@@ -4,7 +4,7 @@ export default function makeRemoveProductShoppingCart({
 }) {
   return async function removeProductShoppingCart({ user, ...productInfo } = {}) {
     let cart = await shoppingCartModel.findOne({ user: user._id })
-    cart.items.pull({ _id: productInfo.product });
+    cart.items.pull({ _id: productInfo.item });
     await cart.save();
     cart = await shoppingCartModel
       .findOne({ user: user._id })

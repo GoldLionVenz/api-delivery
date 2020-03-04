@@ -20,12 +20,10 @@ const removeProductShoppingCart = makeRemoveProductShoppingCart ({
 });
 const decrementProductShoppingCart = makeDecrementProductShoppingCart({
   shoppingCartModel,
-  productModel,
   getShoppingCartResponse
 });
 const incrementProductShoppingCart = makeIncrementProductShoppingCart({
   shoppingCartModel,
-  productModel,
   getShoppingCartResponse
 });
 const shoppingCartServices = Object.freeze({
