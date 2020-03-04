@@ -14,10 +14,11 @@ export default function makeAddProductShoppingCart({
     if(!product){
       throw { message: 'product not found' };
     }
-
+    console.log(product)
     const productFind = cart.items.find(
       item => item.product == productInfo.product
     );
+    console.log(productFind)
     if (!productFind) {
       cart.items.push({
         product: productInfo.product,
