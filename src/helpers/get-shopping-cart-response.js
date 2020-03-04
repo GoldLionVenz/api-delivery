@@ -3,6 +3,7 @@ export default function getShoppingCartResponse(cart) {
   let totalItems = 0;
   console.log(cart)
   cart.items.forEach(item => {
+    console.log(item.product)
     totalItems += item.quantity;
     totalAmount += item.quantity * item.product.price;
   });
