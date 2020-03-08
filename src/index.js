@@ -84,6 +84,11 @@ app.post(
   Auth,
   makeCallBack(shoppingCartController.decrementProductShoppingCart)
 );
+app.post(
+  "/api/v1/cleanshoppingcart",
+  Auth,
+  makeCallBack(shoppingCartController.cleanProductShoppingCart)
+);
 const httpServer = http.createServer(app);
 //const httpsServer = https.createServer(app);
 

@@ -3,6 +3,7 @@ import makeGetProductShoppingCart from "./get-shopping-cart";
 import makeRemoveProductShoppingCart from "./remove-item";
 import makeDecrementProductShoppingCart from "./decrement-product";
 import makeIncrementProductShoppingCart from "./increment-product";
+import makeCleanShoppingCart from "./clean-shopping-cart";
 import { shoppingCartModel, productModel } from "../../models";
 import { getShoppingCartResponse } from "../../helpers";
 const addProductShoppingCart = makeAddProductShoppingCart({
@@ -26,12 +27,17 @@ const incrementProductShoppingCart = makeIncrementProductShoppingCart({
   shoppingCartModel,
   getShoppingCartResponse
 });
+const cleanShoppingCart = makeCleanShoppingCart({
+  shoppingCartModel,
+  getShoppingCartResponse
+});
 const shoppingCartServices = Object.freeze({
   addProductShoppingCart,
   getProductShoppingCart,
   removeProductShoppingCart,
   decrementProductShoppingCart,
-  incrementProductShoppingCart
+  incrementProductShoppingCart,
+  cleanShoppingCart
 });
 
 export default shoppingCartServices;

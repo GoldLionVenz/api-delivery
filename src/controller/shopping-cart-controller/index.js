@@ -3,6 +3,7 @@ import makeGetProductShoppingCart from "./get-shopping-cart";
 import makeRemoveProductShoppingCart from "./remove-product";
 import makeIncrementProductShoppingCart from "./increment-product";
 import makeDecrementProductShoppingCart from "./decrement-product";
+import makeCleanProductShoppingCart from "./clean-shopping-cart";
 import { shoppingCartServices } from "../../uses-cases";
 
 const addProductShoppingCart = makeAddProductShoppingCart(
@@ -20,12 +21,16 @@ const incrementProductShoppingCart = makeIncrementProductShoppingCart(
 const decrementProductShoppingCart = makeDecrementProductShoppingCart(
   shoppingCartServices.decrementProductShoppingCart
 );
+const cleanProductShoppingCart = makeCleanProductShoppingCart(
+  shoppingCartServices.cleanShoppingCart
+);
 const shoppingCartController = {
   addProductShoppingCart,
   getProductShoppingCart,
   removeProductShoppingCart,
   incrementProductShoppingCart,
-  decrementProductShoppingCart
+  decrementProductShoppingCart,
+  cleanProductShoppingCart
 };
 
 export default shoppingCartController;
