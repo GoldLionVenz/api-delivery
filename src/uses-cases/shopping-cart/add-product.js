@@ -11,6 +11,7 @@ export default function makeAddProductShoppingCart({
       });
     }
     const product = await productModel.findOne({_id:productInfo.product});
+    console.log(product)
     if(!product){
       throw { message: 'product not found' };
     }
