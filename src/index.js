@@ -11,10 +11,11 @@ import {
   //paymentController,
   userController,
   productController,
-  shoppingCartController
+  shoppingCartController,
+  orderController
 } from "./controller";
 import makeCallBack from "./express-callback";
-//import makeExpressRedirectCallBack from "./express-callback/express-redirect-callback";
+import makeExpressRedirectCallBack from "./express-callback/express-redirect-callback";
 import { Auth, SuperAdmin } from "./middleware";
 const accessControlAllow = function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -32,7 +33,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(accessControlAllow);
 
 app.use(cors());
-
+app.use(express.static(path.resolve(__dirname, "../public")));
 app.get("/api/v1/qr/:qr", function(req, res) {
   const filePath = path.resolve(__dirname, "../public/qr");
   const getImage = req.params.qr;
@@ -89,6 +90,21 @@ app.post(
   Auth,
   makeCallBack(shoppingCartController.cleanProductShoppingCart)
 );
+app.post(
+  "/api/v1/createorder",
+  Auth,
+  makeCallBack(orderController.createOrder)
+);
+app.get(
+  "/api/v1/paypalredit/:orderId",
+  makeExpressRedirectCallBack(orderController.checkOrderStatus)
+);
+app.get("/paypalaproved", function(req, res) {
+  res.sendFile(path.resolve(__dirname, "../public/payment-aproved.html"));
+});
+app.get("/paypalfail", function(req, res) {
+  res.sendFile(path.resolve(__dirname, "../public/payment-fail.html"));
+});
 const httpServer = http.createServer(app);
 //const httpsServer = https.createServer(app);
 

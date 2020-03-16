@@ -23,8 +23,11 @@ module.exports = function makeExpressRedirectCallabck(controller) {
         }
 
         if (httpResponse.statusCode === 200)
-          res.redirect(`${process.env.URLFRONT}/paypalaproved`);
-        else res.redirect(`${process.env.URLFRONT}/paypalfail?code=I6IkpXVCJ9.eyJfaWQiOiI1ZGYzZDc1ZjVlYjBiNzA2YzgyZTgzZTQiLCJpYXQiOjE1NzY5MzQ1NDAsImV4cCI6MTU3NjkzODE0MH0.2syyJOARB3fXmVJgLRlXADVyMZq-ByNCtqKIHQOXOU4&message=${httpResponse.body.error.errno}`);
+          res.redirect(`${process.env.URL}/paypalaproved`);
+        else
+          res.redirect(
+            `${process.env.URLF}/paypalfail?message=${httpResponse.body.error}`
+          );
       })
       .catch(e =>
         res.status(500).send({
