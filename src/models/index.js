@@ -1,7 +1,6 @@
 import makeUserModel from "./user-model";
 import makeShoppingCartModel from "./shopping-cart-model";
 import makeProductModel from "./product-model";
-import makePaymentModel from "./payment-model";
 import makeOrderModel from "./order-model";
 import mongoose from "mongoose";
 import mongoosePaginate from "mongoose-paginate-v2";
@@ -21,12 +20,6 @@ const orderModel = makeOrderModel({
   Model: mongoose.model,
   plugins: mongoosePaginate
 });
-const paymentModel = makePaymentModel({
-  Schema: mongoose.Schema,
-  Model: mongoose.model,
-  plugins: mongoosePaginate
-});
-
 const userModel = makeUserModel({
   Schema: mongoose.Schema,
   Model: mongoose.model,
@@ -38,4 +31,4 @@ const shoppingCartModel = makeShoppingCartModel({
   Schema: mongoose.Schema,
   Model: mongoose.model
 });
-export { paymentModel, userModel, shoppingCartModel, orderModel, productModel };
+export { userModel, shoppingCartModel, orderModel, productModel };
