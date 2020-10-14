@@ -16,7 +16,7 @@ export default function makeUserModel({
   });
   UserSchema.statics.findByCredentials = async (email, password) => {
     // Search for a user by email and password.
-    const user = await User.findOne({ email });
+    let user = await User.findOne({ email });
     if (!user) {
       throw { message: "Invalid login credentials" };
     }
@@ -27,13 +27,9 @@ export default function makeUserModel({
     if (!isPasswordMatch) {
       throw { message: "Invalid login credentials" };
     }
-    return {
-      name: user.name,
-      email: user.email,
-      _id: user._id,
-      sale_point: user.sale_point,
-      user_roll: user.user_roll
-    };
+    user = user.toObject();
+    delete user.password
+    return user
   };
   UserSchema.statics.existsEmail = async email => {
     const resp = await User.findOne({ email: email }, (err, doc) => {

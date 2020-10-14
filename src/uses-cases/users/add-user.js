@@ -9,13 +9,8 @@ export default function makeAddUser({ userModel, encryptPassword }) {
     
     userInfo.password = await encryptPassword.hash(userInfo.password, 8);
     const user = await userModel.create({
-      name: userInfo.name,
-      userName: userInfo.userName,
-      email: userInfo.email,
-      document: userInfo.document,
+      ...userInfo,
       password: userInfo.password,
-      phoneNumber: userInfo.phoneNumber,
-      address: userInfo.address,
       userRoll: "user"
     });
 

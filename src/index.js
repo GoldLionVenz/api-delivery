@@ -56,9 +56,11 @@ app.get("/", (req, res) => {
 });
 app.post("/api/v1/register", makeCallBack(userController.addUser));
 app.post("/api/v1/login", makeCallBack(userController.loginUser));
+app.post("/api/v1/updateuser", Auth, makeCallBack(userController.updateUser));
 app.post("/api/v1/addproduct", makeCallBack(productController.addProduct));
 app.post("/api/v1/findproduct", makeCallBack(productController.findProduct));
 app.post("/api/v1/getproducts", makeCallBack(productController.getProducts));
+app.post("/api/v1/getproductspercategory", makeCallBack(productController.getProductsPerCategory));
 app.post("/api/v1/findproducts", makeCallBack(productController.findProducts));
 app.post(
   "/api/v1/addproductshoppingcart",
