@@ -1,22 +1,26 @@
-export default function makeCheckOrderStatus(stausPaymentServices) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = makeCheckOrderStatus;
+
+function makeCheckOrderStatus(stausPaymentServices) {
   return async function checkOrder(httpRequest) {
     const headers = {
       "Content-Type": "application/json"
     };
+
     try {
       const orderInfo = httpRequest.body;
-      const response = await stausPaymentServices({
-        user: httpRequest.user,
-        ...orderInfo
+      const response = await stausPaymentServices({ ...orderInfo
       });
-
       return {
         headers,
         statusCode: 200,
         body: response
       };
     } catch (e) {
-      console.log(e)
       return {
         headers,
         statusCode: 400,

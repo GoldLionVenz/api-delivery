@@ -12,7 +12,7 @@ import {
   userController,
   productController,
   shoppingCartController,
-  orderController
+  orderController,
 } from "./controller";
 import makeCallBack from "./express-callback";
 import makeExpressRedirectCallBack from "./express-callback/express-redirect-callback";
@@ -51,7 +51,7 @@ app.get("/api/v1/qr/:qr", function(req, res) {
 });
 app.get("/", (req, res) => {
   return res.send({
-    message: "Bienvenido"
+    message: "Bienvenido",
   });
 });
 app.post("/api/v1/register", makeCallBack(userController.addUser));
@@ -60,7 +60,10 @@ app.post("/api/v1/updateuser", Auth, makeCallBack(userController.updateUser));
 app.post("/api/v1/addproduct", makeCallBack(productController.addProduct));
 app.post("/api/v1/findproduct", makeCallBack(productController.findProduct));
 app.post("/api/v1/getproducts", makeCallBack(productController.getProducts));
-app.post("/api/v1/getproductspercategory", makeCallBack(productController.getProductsPerCategory));
+app.post(
+  "/api/v1/getproductspercategory",
+  makeCallBack(productController.getProductsPerCategory)
+);
 app.post("/api/v1/findproducts", makeCallBack(productController.findProducts));
 app.post(
   "/api/v1/addproductshoppingcart",
@@ -97,15 +100,22 @@ app.post(
   Auth,
   makeCallBack(orderController.createOrder)
 );
-app.get(
-  "/api/v1/paypalredit/:orderId",
-  makeExpressRedirectCallBack(orderController.checkOrderStatus)
+app.post("/api/v1/getorder", Auth, makeCallBack(orderController.getOrder));
+app.post(
+  "/api/v1/paypalredit",
+  Auth,
+  makeCallBack(orderController.checkOrderStatus)
 );
 app.get("/paypalaproved", function(req, res) {
   res.sendFile(path.resolve(__dirname, "../public/payment-aproved.html"));
 });
 app.get("/paypalfail", function(req, res) {
   res.sendFile(path.resolve(__dirname, "../public/payment-fail.html"));
+});
+app.use("/public/js", express.static(path.resolve(__dirname, "../public/js")));
+
+app.get("/api/v1/view/payment", function(req, res) {
+  res.sendFile(path.resolve(__dirname, "../public/paypal-smart-button.html"));
 });
 const httpServer = http.createServer(app);
 //const httpsServer = https.createServer(app);
