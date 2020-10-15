@@ -1,4 +1,4 @@
-const uri = "http://192.168.86.56:8000/api/v1";
+const uri = "https://infinite-citadel-83328.herokuapp.com/api/v1";
 function formatCurrency(value) {
   let amount = value.split(".");
   return `${new Intl.NumberFormat("de-DE").format(amount[0])},${amount[1]}`;
