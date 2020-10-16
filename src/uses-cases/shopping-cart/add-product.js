@@ -11,7 +11,6 @@ export default function makeAddProductShoppingCart({
       });
     }
     const product = await productModel.findOne({_id:productInfo.product});
-    console.log(product)
     if(!product){
       throw { message: 'product not found' };
     }
@@ -34,11 +33,11 @@ export default function makeAddProductShoppingCart({
         }
       );
     }
-
     cart = await shoppingCartModel
       .findOne({ user: user._id })
       .populate("items.product")
       .populate("user");
+    console.log(cart)
     return {
       message: "Producto agregado",
       cart: getShoppingCartResponse(cart)

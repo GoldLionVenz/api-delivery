@@ -6,6 +6,7 @@ export default function makeUserModel({
 }) {
   const UserSchema = new Schema({
     name: { type: String, required: true },
+    lastName: { type: String, required: true },
     userName: { type: String, required: true },
     email: { type: String, required: true, unique: true, lowercase: true },
     document: { type: String, required: true },

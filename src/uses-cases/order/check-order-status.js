@@ -50,6 +50,6 @@ export default function makeCheckOrderStatus({
         }
       }
     );
-    throw { message: "Pago rechazado" };
+    throw { message: "Pago rechazado", ...orderInfo };
   };
 }

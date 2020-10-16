@@ -60,6 +60,7 @@ app.post("/api/v1/updateuser", Auth, makeCallBack(userController.updateUser));
 app.post("/api/v1/addproduct", makeCallBack(productController.addProduct));
 app.post("/api/v1/findproduct", makeCallBack(productController.findProduct));
 app.post("/api/v1/getproducts", makeCallBack(productController.getProducts));
+app.get("/api/v1/getcategories", makeCallBack(productController.getCategories));
 app.post(
   "/api/v1/getproductspercategory",
   makeCallBack(productController.getProductsPerCategory)
