@@ -44,12 +44,12 @@ async function getShoppingCart({ token, shippingName, shippingAdrress }) {
       {
         description: "Stuff",
         amount: {
-          value: resp.totalAmount,
+          value: parseFloat(resp.totalAmount).toFixed(2),
           currency_code: "USD",
           breakdown: {
             item_total: {
               currency_code: "USD",
-              value: resp.totalAmount,
+              value: parseFloat(resp.totalAmount).toFixed(2),
             },
           },
         },

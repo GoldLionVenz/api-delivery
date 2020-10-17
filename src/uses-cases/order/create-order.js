@@ -30,7 +30,7 @@ export default function makeCreateOrder({
         name: product.product.name,
         unit_amount: {
           currency_code:"USD",
-          value:`${product.product.price}.00`
+          value:parseFloat(`${product.product.price}`).toFixed(2)
         },
         quantity: product.quantity
       }
@@ -38,7 +38,7 @@ export default function makeCreateOrder({
     return { 
       items,
       orderId:order._id,
-      totalAmount: `${order.totalAmount}.00`
+      totalAmount: parseFloat(`${order.totalAmount}`).toFixed(2)
      };
   };
 }
