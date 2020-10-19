@@ -108,6 +108,8 @@ app.post(
   Auth,
   makeCallBack(orderController.checkOrderStatus)
 );
+app.post("/api/v1/generatetoken", makeCallBack(userController.generateToken));
+app.post("/api/v1/editpassword", makeCallBack(userController.editUserPassword));
 app.get("/paypalaproved", function(req, res) {
   res.sendFile(path.resolve(__dirname, "../public/payment-aproved.html"));
 });

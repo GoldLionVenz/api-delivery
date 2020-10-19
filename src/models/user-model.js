@@ -13,7 +13,8 @@ export default function makeUserModel({
     password: { type: String, required: true, minLength: 7 },
     phoneNumber: { type: String, required: true },
     address: { type: String, required: true },
-    userRoll: { type: String, required: true }
+    userRoll: { type: String, required: true },
+    token: { type: Object }
   });
   UserSchema.statics.findByCredentials = async (email, password) => {
     // Search for a user by email and password.

@@ -1,20 +1,13 @@
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = makeFindProducts;
-
-function makeFindProducts(findService) {
-  return async function findProducts(httpRequest) {
+export default function makeGenerateToken(generateTokeService) {
+  return async function generateToken(httpRequest) {
     const headers = {
       "Content-Type": "application/json"
     };
-
     try {
-      const productsInfo = httpRequest.body;
-      const response = await findService({ ...productsInfo
+      const response = await generateTokeService({
+        email: httpRequest.body.email
       });
+
       return {
         headers,
         statusCode: 200,
