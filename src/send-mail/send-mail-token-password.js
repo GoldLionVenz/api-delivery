@@ -12,7 +12,7 @@ export default function makeSendMailResetPassword({
       token
     });
     const info = await serverMail.sendMail({
-      from: 'clubdeboxeo@back9.com.ve',
+      from: '',
       to: email,
       subject: "Restablecer contraseña",
       html: buildEmailTemplate,
