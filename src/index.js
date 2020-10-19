@@ -102,6 +102,7 @@ app.post(
   makeCallBack(orderController.createOrder)
 );
 app.post("/api/v1/getorder", Auth, makeCallBack(orderController.getOrder));
+app.post("/api/v1/getorders", Auth, makeCallBack(orderController.getOrders));
 app.post(
   "/api/v1/paypalredit",
   Auth,

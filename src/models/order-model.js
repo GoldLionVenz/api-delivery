@@ -21,7 +21,8 @@ export default function makeOrderModel({ Schema, Model, plugins }) {
     updated_at: { type: String, required: true },
     created_at: { type: String, required: true },
     totalAmount: { type: Number, required: true },
-    status: { type: String, required: true }
+    status: { type: String, required: true },
+    ref: { type: String, required: true }
   });
   orderSchema.plugin(plugins);
   return Model("Order", orderSchema);

@@ -23,7 +23,11 @@ export default function makeCreateOrder({
         created_at: now(),
         totalAmount: cart.totalAmount,
         products: itemsOrder,
-        status: "in_process"
+        status: "in_process",
+        ref:Math.random()
+        .toString(36)
+        .replace(/[^a-zA-Z0-9]+/g, "")
+        .substring(0, 6).toUpperCase()
     });
     const items = order.products.map(product=>{
       return {
