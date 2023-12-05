@@ -15,24 +15,20 @@ module.exports = function makeExpressRedirectCallabck(controller) {
         "User-Agent": req.get("User-Agent"),
         Authorization: req.get("Authorization")
       }
-    };
+    }
     controller(httpRequest)
-      .then(httpResponse => {
+      .then((httpResponse) => {
         if (httpResponse.headers) {
-          res.set(httpResponse.headers);
+          res.set(httpResponse.headers)
         }
 
-        if (httpResponse.statusCode === 200)
-          res.redirect(`${process.env.URL}/paypalaproved`);
-        else
-          res.redirect(
-            `${process.env.URLF}/paypalfail?message=${httpResponse.body.error}`
-          );
+        if (httpResponse.statusCode === 200) res.redirect(`${process.env.URL}/paypalaproved`)
+        else res.redirect(`${process.env.URLF}/paypalfail?message=${httpResponse.body.error}`)
       })
-      .catch(e =>
+      .catch((e) =>
         res.status(500).send({
           error: "An unkown error occurred."
         })
-      );
-  };
-};
+      )
+  }
+}
