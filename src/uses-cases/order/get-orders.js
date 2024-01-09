@@ -1,7 +1,7 @@
 export default function makeGetOrders({ orderModel }) {
   return async function getOrders({ user, ...orderInfo } = {}) {
     const result = await orderModel.paginate(
-      { user: user._id, status: "approved" },
+      { user: user._id },
       {
         page: orderInfo.page,
         limit: orderInfo.limit,

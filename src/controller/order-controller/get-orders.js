@@ -4,7 +4,7 @@ export default function makeGetOrders(getOrdersServices) {
       "Content-Type": "application/json",
     };
     try {
-      const orderInfo = httpRequest.body;
+      const orderInfo = httpRequest.query;
       const response = await getOrdersServices({
         user: httpRequest.user,
         ...orderInfo,
