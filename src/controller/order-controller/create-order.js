@@ -16,6 +16,7 @@ export default function makeCreateOrder(createService) {
         body: response
       };
     } catch (e) {
+      console.log(e)
       return {
         headers,
         statusCode: 400,

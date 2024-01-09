@@ -14,6 +14,7 @@ export default function makeGenerateToken(generateTokeService) {
         body: response
       };
     } catch (e) {
+      console.log(e)
       return {
         headers,
         statusCode: 400,

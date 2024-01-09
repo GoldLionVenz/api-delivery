@@ -3,20 +3,30 @@ export default function makeAddProduct({
     now
  }) {
   return async function addProduct({ ...productInfo } = {}) {
-
-      const product = await productModel.create({
-        name: productInfo.name,
-        price: productInfo.price,
-        image: productInfo.image,
-        description: productInfo.description,
-        category: productInfo.category,
-        updated_at: now(),
-        created_at: now()
-      });
-
+      const query = []
+      for (const product of productInfo.products) {
+        if (product._id) {
+          query.push({
+            updateOne: {
+              filter: { _id: product._id },
+              update: {
+                ...product
+              }
+            }
+          })
+        } else {
+          query.push({
+            insertOne: {
+              document: {
+                ...product
+              }
+            }
+          })
+        }
+      }
+      await productModel.bulkWrite(query)
       return {
-        message: "Producto agregado ",
-        product
+        message: "Productos agregados"
       }
   };
 }

@@ -15,6 +15,7 @@ export default function makeGetProducts(getProductsService) {
         body: response
       };
     } catch (e) {
+      console.log(e)
       return {
         headers,
         statusCode: 400,

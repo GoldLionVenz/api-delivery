@@ -6,17 +6,17 @@ export default function makeCheckOrderStatus({
 }) {
   return async function checkOrderStatus({ user, ...orderInfo } = {}) {
     console.log(user)
-    const payment = await paymentGateWay.executeOrder(orderInfo.paymentId);
+    const payment = await paymentGateWay.executeOrder(orderInfo.paymentId)
     console.log(payment)
     if (payment.status === "COMPLETED") {
       await shoppingCartModel.updateOne(
-          { user: user._id },
-          {
-            $set: {
-              items: []
-            }
+        { user: user._id },
+        {
+          $set: {
+            items: []
           }
-      );
+        }
+      )
       await orderModel.updateOne(
         {
           _id: orderInfo.orderId
@@ -32,12 +32,12 @@ export default function makeCheckOrderStatus({
             updated_at: now()
           }
         }
-      );
+      )
 
       return {
         message: "Pago aprobado",
         ...orderInfo
-      };
+      }
     }
     await orderModel.updateOne(
       {
@@ -49,7 +49,7 @@ export default function makeCheckOrderStatus({
           updated_at: now()
         }
       }
-    );
-    throw { message: "Pago rechazado", ...orderInfo };
-  };
+    )
+    throw { message: "Pago rechazado", ...orderInfo }
+  }
 }

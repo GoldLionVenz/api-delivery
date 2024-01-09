@@ -96,6 +96,11 @@ app.post("/api/v1/getorders", Auth, makeCallBack(orderController.getOrders))
 app.post("/api/v1/paypalredit", Auth, makeCallBack(orderController.checkOrderStatus))
 app.post("/api/v1/generatetoken", makeCallBack(userController.generateToken))
 app.post("/api/v1/editpassword", makeCallBack(userController.editUserPassword))
+
+//orders
+app.post("/api/v1/orders/approved", SuperAdmin, makeCallBack(orderController.approveOrder))
+app.post("/api/v1/orders/reject", SuperAdmin, makeCallBack(orderController.rejectOrder))
+
 app.get("/paypalaproved", function(req, res) {
   res.sendFile(path.resolve(__dirname, "../public/payment-aproved.html"))
 })

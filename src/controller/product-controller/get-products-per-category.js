@@ -15,6 +15,7 @@ export default function makeGetProductsPerCategory(getProductsService) {
           body: response
         };
       } catch (e) {
+        console.log(e)
         return {
           headers,
           statusCode: 400,

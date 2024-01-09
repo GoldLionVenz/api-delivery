@@ -15,6 +15,7 @@ export default function makeLoginUser(loginService) {
           body: response
         };
       } catch (e) {
+        console.log(e)
         return {
           headers,
           statusCode: 400,
