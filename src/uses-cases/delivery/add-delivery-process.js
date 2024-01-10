@@ -1,5 +1,5 @@
-export default function makeApproveOrder({ orderModel }) {
-  return async function approveOrder({ admin, orderId } = {}) {
+export default function makeAddDeliveryProcess({ orderModel }) {
+  return async function addDeliveryProcess({ deliveryUser, orderId } = {}) {
     if (!orderId) {
       throw { message: "Numero de orden requerido" }
     }
@@ -8,16 +8,15 @@ export default function makeApproveOrder({ orderModel }) {
     if (!order) {
       throw { message: "Order no encontrada" }
     }
-    if (order.status != "pending") {
-      throw { message: "Order debe tener status pendiente" }
+    if (order.status != "approved") {
+      throw { message: "Order debe tener status aprobado" }
     }
     await orderModel.updateOne(
       { _id: orderId },
       {
         $set: {
-          status: "approved",
-          deliveryStatus: "preparing_order",
-          admin: admin._id
+          deliveryStatus: "assigned_delivery_user",
+          deliveryUser
         }
       }
     )

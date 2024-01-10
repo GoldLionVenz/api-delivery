@@ -37,7 +37,7 @@ export default function makeDecrementProductShoppingCart({
       .populate("user");
     return {
       message: "Producto decrementado",
-      cart: getShoppingCartResponse(cart)
+      cart: await getShoppingCartResponse(cart)
     };
   };
 }

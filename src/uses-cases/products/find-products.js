@@ -1,5 +1,6 @@
-export default function makeFindProducts({ productModel }) {
+export default function makeFindProducts({ productModel, getBssAmount }) {
   return async function findProducts({ ...productsInfo } = {}) {
+    const dolarPrice = await getBssAmount(1)
     const result = await productModel.paginate(
       {
         $or: [
@@ -12,7 +13,15 @@ export default function makeFindProducts({ productModel }) {
         limit: productsInfo.limit,
         sort: { created_at: "desc" }
       }
-    );
-    return result;
-  };
+    )
+    return {
+      ...result,
+      docs: result.docs.map((elem) => {
+        return {
+          priceBss: elem.price * dolarPrice,
+          ...elem.toObject()
+        }
+      })
+    }
+  }
 }

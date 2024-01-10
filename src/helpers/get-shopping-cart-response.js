@@ -1,4 +1,6 @@
-export default function getShoppingCartResponse(cart) {
+import getBssAmount from "./get-bss-amount"
+export default async function getShoppingCartResponse(cart) {
+  const dolarPrice = await getBssAmount(1)
   let totalAmount = 0
   let totalItems = 0
   cart.items.forEach((item) => {
@@ -6,7 +8,16 @@ export default function getShoppingCartResponse(cart) {
     totalAmount += item.quantity * item.product.price
   })
   return {
-    items: cart.items,
+    items: cart.items.map((elem) => {
+      return {
+        ...elem.toObject(),
+        product: {
+          ...elem.product.toObject(),
+          priceBss: dolarPrice * elem.product.price
+        }
+      }
+    }),
+    totalAmountBss: dolarPrice * totalAmount,
     totalAmount,
     totalItems
   }

@@ -12,7 +12,7 @@ export default function makeRemoveProductShoppingCart({
       .populate("user");
     return {
       message: "Producto eliminado",
-      cart: getShoppingCartResponse(cart)
+      cart: await getShoppingCartResponse(cart)
     };
   };
 }

@@ -26,6 +26,8 @@ export default function makeOrderModel({ Schema, Model, plugins }) {
         address: { type: String }
       },
       shipping: { type: Object },
+      deliveryStatus: { type: String },
+      deliveryUser: { type: Schema.Types.ObjectId, ref: "User" },
       user: { type: Schema.Types.ObjectId, ref: "User" },
       totalAmount: { type: Number, required: true },
       status: { type: String, default: "pending" }

@@ -29,7 +29,7 @@ export default function makeIncrementProductShoppingCart({
         .populate("user");
       return {
         message: "Producto incrementado",
-        cart: getShoppingCartResponse(cart)
+        cart: await getShoppingCartResponse(cart)
       };
     };
   }

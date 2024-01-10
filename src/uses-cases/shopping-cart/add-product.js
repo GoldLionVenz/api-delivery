@@ -40,7 +40,7 @@ export default function makeAddProductShoppingCart({
     console.log(cart)
     return {
       message: "Producto agregado",
-      cart: getShoppingCartResponse(cart)
+      cart: await getShoppingCartResponse(cart)
     };
   };
 }

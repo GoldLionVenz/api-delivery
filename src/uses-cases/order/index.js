@@ -22,7 +22,7 @@ const checkOrderStatus = makeCheckOrderStatus({
   now
 })
 
-const getOrder = makeGetOrder({ orderModel })
+const getOrder = makeGetOrder({ orderModel, getBssAmount })
 const getOrders = makeGetOrders({ orderModel })
 const approveOrder = makeApproveOrder({ orderModel })
 const rejectOrder = makeRejectOrder({ orderModel })

@@ -12,7 +12,8 @@ import {
   userController,
   productController,
   shoppingCartController,
-  orderController
+  orderController,
+  dolarPriceController,
 } from "./controller"
 import makeCallBack from "./express-callback"
 import makeExpressRedirectCallBack from "./express-callback/express-redirect-callback"
@@ -96,6 +97,10 @@ app.get("/api/v1/getorders", Auth, makeCallBack(orderController.getOrders))
 app.post("/api/v1/paypalredit", Auth, makeCallBack(orderController.checkOrderStatus))
 app.post("/api/v1/generatetoken", makeCallBack(userController.generateToken))
 app.post("/api/v1/editpassword", makeCallBack(userController.editUserPassword))
+
+//dolarprice
+app.get("/api/v1/dolarprice", makeCallBack(dolarPriceController.getDolar))
+app.post("/api/v1/dolarprice", SuperAdmin, makeCallBack(dolarPriceController.putDolar))
 
 //orders
 app.post("/api/v1/orders/approved", SuperAdmin, makeCallBack(orderController.approveOrder))

@@ -5,7 +5,7 @@ import makeDecrementProductShoppingCart from "./decrement-product";
 import makeIncrementProductShoppingCart from "./increment-product";
 import makeCleanShoppingCart from "./clean-shopping-cart";
 import { shoppingCartModel, productModel } from "../../models";
-import { getShoppingCartResponse } from "../../helpers";
+import { getShoppingCartResponse, getBssAmount } from "../../helpers";
 const addProductShoppingCart = makeAddProductShoppingCart({
   shoppingCartModel,
   productModel,
@@ -13,7 +13,8 @@ const addProductShoppingCart = makeAddProductShoppingCart({
 });
 const getProductShoppingCart = makeGetProductShoppingCart({
   shoppingCartModel,
-  getShoppingCartResponse
+  getShoppingCartResponse,
+  getBssAmount
 });
 const removeProductShoppingCart = makeRemoveProductShoppingCart ({
   shoppingCartModel,

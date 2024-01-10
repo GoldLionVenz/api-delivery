@@ -9,7 +9,7 @@ export default function makeCreateOrder({
     if (!cart) {
       throw { message: "shooping cart not found" }
     }
-    cart = getShoppingCartResponse(cart)
+    cart = await getShoppingCartResponse(cart)
     const itemsOrder = cart.items.map((item) => {
       return {
         quantity: item.quantity,
@@ -18,7 +18,7 @@ export default function makeCreateOrder({
     })
 
     if (orderInfo.payment.type === "bss" || orderInfo.payment.type === "pdv") {
-      cart.totalAmount += parseFloat(await getBssAmount(cart.totalAmount))
+      cart.totalAmount = parseFloat(await getBssAmount(cart.totalAmount))
       orderInfo.currency = "VES"
     } 
     const order = await orderModel.create({
