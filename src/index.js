@@ -13,11 +13,12 @@ import {
   productController,
   shoppingCartController,
   orderController,
-  dolarPriceController,
+  dolarPriceController
 } from "./controller"
 import makeCallBack from "./express-callback"
 import makeExpressRedirectCallBack from "./express-callback/express-redirect-callback"
 import { Auth, SuperAdmin } from "./middleware"
+import fileUpload from "express-fileupload"
 const accessControlAllow = function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*")
   res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE")
@@ -28,6 +29,7 @@ dotenv.config()
 const app = express()
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
+app.use(fileUpload())
 app.use(accessControlAllow)
 
 app.use(cors())
@@ -105,6 +107,9 @@ app.post("/api/v1/dolarprice", SuperAdmin, makeCallBack(dolarPriceController.put
 //orders
 app.post("/api/v1/orders/approved", SuperAdmin, makeCallBack(orderController.approveOrder))
 app.post("/api/v1/orders/reject", SuperAdmin, makeCallBack(orderController.rejectOrder))
+
+//products
+app.post("/api/v1/products/addproductandimg", makeCallBack(productController.addProductAndImg))
 
 app.get("/paypalaproved", function(req, res) {
   res.sendFile(path.resolve(__dirname, "../public/payment-aproved.html"))

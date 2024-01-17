@@ -6,6 +6,7 @@ module.exports = function makeExpressCallabck(controller) {
       params: req.params,
       ip: req.ip,
       method: req.method,
+      files: req.files,
       path: req.path,
       user: req.user,
       headers: {
@@ -15,20 +16,20 @@ module.exports = function makeExpressCallabck(controller) {
         "User-Agent": req.get("User-Agent"),
         Authorization: req.get("Authorization")
       }
-    };
+    }
     controller(httpRequest)
-      .then(httpResponse => {
+      .then((httpResponse) => {
         if (httpResponse.headers) {
-          res.set(httpResponse.headers);
+          res.set(httpResponse.headers)
         }
 
-        res.type("json");
-        res.status(httpResponse.statusCode).send(httpResponse.body);
+        res.type("json")
+        res.status(httpResponse.statusCode).send(httpResponse.body)
       })
-      .catch(e =>
+      .catch((e) =>
         res.status(500).send({
           error: "An unkown error occurred."
         })
-      );
-  };
-};
+      )
+  }
+}
