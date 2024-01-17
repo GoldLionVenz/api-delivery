@@ -4,7 +4,6 @@ export default function makeAddFileProductAndImg({ productModel, bufferToStream,
     const product = await productModel.create({
       ...productInfo
     })
-
     const driveService = new DriveService()
     const folderName = "PRODUCTS"
     let folder = await driveService.searchFolder(folderName).catch((error) => {
@@ -27,16 +26,12 @@ export default function makeAddFileProductAndImg({ productModel, bufferToStream,
       .catch((error) => {
         console.error(error);
       })
-
     await productModel.updateOne(
       { _id: product._id },
       {
         image: `https://drive.google.com/uc?export=view&id=${fileId.data.id}`
       }
     )
-
-    console.info("File uploaded successfully!")
-
     return product
   }
 }
