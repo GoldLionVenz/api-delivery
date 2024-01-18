@@ -26,6 +26,7 @@ export default function makeAddFileProductAndImg({ productModel, bufferToStream,
       .catch((error) => {
         console.error(error);
       })
+      
     await productModel.updateOne(
       { _id: product._id },
       {
