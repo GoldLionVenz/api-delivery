@@ -9,6 +9,7 @@ const createOrder = makeCreateOrder(orderServices.createOrder)
 const checkOrderStatus = makeCheckOrderStatus(orderServices.checkOrderStatus)
 const getOrder = makeGetOrder(orderServices.getOrder)
 const getOrders = makeGetOrders(orderServices.getOrders)
+const getOrdersAdmin = makeGetOrders(orderServices.getOrdersAdmin)
 const approveOrder = makeApproveOrder(orderServices.approveOrder)
 const rejectOrder = makeRejectOrder(orderServices.rejectOrder)
 const orderController = {
@@ -17,7 +18,8 @@ const orderController = {
   getOrder,
   getOrders,
   approveOrder,
-  rejectOrder
+  rejectOrder,
+  getOrdersAdmin
 }
 
 export default orderController

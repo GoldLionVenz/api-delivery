@@ -4,7 +4,6 @@ export default function makeGetOrder(getOrderServices) {
       "Content-Type": "application/json"
     }
     try {
-      console.log(httpRequest.params._id)
       const response = await getOrderServices({
         orderId: httpRequest.params._id
       })
