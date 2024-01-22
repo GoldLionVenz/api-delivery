@@ -30,7 +30,7 @@ export default function makeAddFileProductAndImg({ productModel, bufferToStream,
     await productModel.updateOne(
       { _id: product._id },
       {
-        image: `https://drive.google.com/uc?export=view&id=${fileId.data.id}`
+        image: `${fileId.data.id}`
       }
     )
     return product
