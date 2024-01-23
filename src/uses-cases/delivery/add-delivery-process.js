@@ -21,7 +21,7 @@ export default function makeAddDeliveryProcess({ orderModel }) {
       }
     )
     return {
-      message: "Orden Aprobada"
+      message: "Orden asignada al repartidor"
     }
   }
 }

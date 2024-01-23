@@ -13,7 +13,8 @@ import {
   productController,
   shoppingCartController,
   orderController,
-  dolarPriceController
+  dolarPriceController,
+  deliveryController
 } from "./controller"
 import makeCallBack from "./express-callback"
 import makeExpressRedirectCallBack from "./express-callback/express-redirect-callback"
@@ -112,8 +113,15 @@ app.get("/api/v1/orders/admin", SuperAdmin, makeCallBack(orderController.getOrde
 //products
 app.post("/api/v1/products/addproductandimg", makeCallBack(productController.addProductAndImg))
 
-//
+//admin
 app.post("/api/v1/admin/subuser", SuperAdmin, makeCallBack(userController.addSubUser))
+
+//delivery
+app.post(
+  "/api/v1/orders/assigneddelivery",
+  SuperAdmin,
+  makeCallBack(deliveryController.addDeliveryProcess)
+)
 app.get("/paypalaproved", function(req, res) {
   res.sendFile(path.resolve(__dirname, "../public/payment-aproved.html"))
 })
