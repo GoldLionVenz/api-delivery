@@ -6,7 +6,6 @@ export default function makeAddUser({ userModel, encryptPassword }) {
     if (await userModel.existsUserName(userInfo.userName)) {
       throw { message: "user name exists" }
     }
-
     userInfo.password = await encryptPassword.hash(userInfo.password, 8)
     const user = await userModel.create({
       ...userInfo,

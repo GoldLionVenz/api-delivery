@@ -112,6 +112,8 @@ app.get("/api/v1/orders/admin", SuperAdmin, makeCallBack(orderController.getOrde
 //products
 app.post("/api/v1/products/addproductandimg", makeCallBack(productController.addProductAndImg))
 
+//
+app.post("/api/v1/admin/subuser", SuperAdmin, makeCallBack(userController.addSubUser))
 app.get("/paypalaproved", function(req, res) {
   res.sendFile(path.resolve(__dirname, "../public/payment-aproved.html"))
 })
