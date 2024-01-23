@@ -5,7 +5,7 @@ export default function makeProductModel({ Schema, Model, plugins }) {
       price: { type: Number, required: true },
       image: { type: String },
       description: { type: String, required: true },
-      category: { type: String, required: true }
+      category: { type: Schema.Types.ObjectId, ref: "Category" }
     },
     {
       timestamps: { createdAt: "createdAt" }

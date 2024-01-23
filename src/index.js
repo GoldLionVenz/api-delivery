@@ -14,7 +14,8 @@ import {
   shoppingCartController,
   orderController,
   dolarPriceController,
-  deliveryController
+  deliveryController,
+  categoryController
 } from "./controller"
 import makeCallBack from "./express-callback"
 import makeExpressRedirectCallBack from "./express-callback/express-redirect-callback"
@@ -122,6 +123,11 @@ app.post(
   SuperAdmin,
   makeCallBack(deliveryController.addDeliveryProcess)
 )
+
+//categories
+app.post("/api/v1/categories", SuperAdmin, makeCallBack(categoryController.addCategory))
+app.get("/api/v1/categories", makeCallBack(categoryController.getCategory))
+
 app.get("/paypalaproved", function(req, res) {
   res.sendFile(path.resolve(__dirname, "../public/payment-aproved.html"))
 })

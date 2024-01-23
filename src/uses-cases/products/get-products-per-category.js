@@ -8,7 +8,8 @@ export default function makeGetProductsPerCategory({ productModel, getBssAmount 
       {
         page: productsInfo.page,
         limit: productsInfo.limit,
-        sort: { created_at: "desc" }
+        sort: { created_at: "desc" },
+        populate: "category"
       }
     )
     return {

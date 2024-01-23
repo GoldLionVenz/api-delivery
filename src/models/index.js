@@ -6,6 +6,7 @@ import mongoose from "mongoose"
 import mongoosePaginate from "mongoose-paginate-v2"
 import bcrypt from "bcryptjs"
 import makeDolarPriceModel from "./dolar-price-model"
+import makeCategoryModel from "./category-model"
 console.log(process.env.DB_URL)
 mongoose.connect(process.env.DB_URL, {
   useNewUrlParser: true
@@ -36,4 +37,9 @@ const dolarPriceModel = makeDolarPriceModel({
   Schema: mongoose.Schema,
   Model: mongoose.model
 })
-export { userModel, shoppingCartModel, orderModel, productModel, dolarPriceModel }
+const categoryModel = makeCategoryModel({
+  Schema: mongoose.Schema,
+  Model: mongoose.model,
+  plugins: mongoosePaginate
+})
+export { userModel, shoppingCartModel, orderModel, productModel, dolarPriceModel, categoryModel }
