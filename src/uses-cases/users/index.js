@@ -9,6 +9,7 @@ import sendMailService from "../../send-mail"
 import makeEditPasswordUser from "./edit-user-password"
 import { isTokenValid } from "../../helpers/"
 import makeAddSubUser from "./add-sub-user"
+import makeGetUsers from "./get-users"
 const addUser = makeAddUser({ userModel, encryptPassword: bcrypt })
 const loginUser = makeLoginUser({ userModel, jwt })
 const updateUser = makeUpdateUser({ userModel })
@@ -22,13 +23,15 @@ const addSubUser = makeAddSubUser({
   userModel,
   encryptPassword: bcrypt
 })
+const getUsers = makeGetUsers({ userModel })
 const userServices = Object.freeze({
   addUser,
   loginUser,
   updateUser,
   generateToken,
   editPasswordUser,
-  addSubUser
+  addSubUser,
+  getUsers
 })
 
 export default userServices

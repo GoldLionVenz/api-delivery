@@ -115,7 +115,7 @@ app.post("/api/v1/products/addproductandimg", makeCallBack(productController.add
 
 //admin
 app.post("/api/v1/admin/subuser", SuperAdmin, makeCallBack(userController.addSubUser))
-
+app.get("/api/v1/admin/users", SuperAdmin, makeCallBack(userController.getUsers))
 //delivery
 app.post(
   "/api/v1/orders/assigneddelivery",
