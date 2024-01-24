@@ -129,6 +129,7 @@ app.post(
   makeCallBack(deliveryController.deliveryOnTheWay)
 )
 app.get("/api/v1/orders/delivery", DeliveryUser, makeCallBack(orderController.getOrdersDelivery))
+app.get("/api/v1/orders/completed", Auth, makeCallBack(deliveryController.deliveryComplete))
 //categories
 app.post("/api/v1/categories", SuperAdmin, makeCallBack(categoryController.addCategory))
 app.get("/api/v1/categories", makeCallBack(categoryController.getCategory))
