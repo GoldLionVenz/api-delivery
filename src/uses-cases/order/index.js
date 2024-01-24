@@ -8,6 +8,7 @@ import paypalGateWay from "../../paypal-gateway"
 import makeApproveOrder from "./approve-order"
 import makeRejectOrder from "./reject-order"
 import makeGetOrdersAdmin from "./get-orders-admin"
+import makeGetOrdersDelivery from "./get-orders-delivery"
 const createOrder = makeCreateOrder({
   shoppingCartModel,
   orderModel,
@@ -28,6 +29,7 @@ const getOrders = makeGetOrders({ orderModel })
 const approveOrder = makeApproveOrder({ orderModel })
 const rejectOrder = makeRejectOrder({ orderModel })
 const getOrdersAdmin = makeGetOrdersAdmin({ orderModel })
+const getOrdersDelivery = makeGetOrdersDelivery({ orderModel })
 const orderServices = Object.freeze({
   createOrder,
   checkOrderStatus,
@@ -35,7 +37,8 @@ const orderServices = Object.freeze({
   getOrders,
   approveOrder,
   rejectOrder,
-  getOrdersAdmin
+  getOrdersAdmin,
+  getOrdersDelivery
 })
 
 export default orderServices

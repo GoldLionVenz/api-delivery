@@ -1,3 +1,4 @@
-import Auth from "./auth";
+import Auth from "./auth"
 import SuperAdmin from "./super-admin"
-export { Auth, SuperAdmin };
+import DeliveryUser from "./delivery"
+export { Auth, SuperAdmin, DeliveryUser }

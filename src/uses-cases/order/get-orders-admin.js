@@ -13,7 +13,11 @@ export default function makeGetOrdersAdmin({ orderModel }) {
           },
           {
             path: "products.product"
-          }
+          },
+          {
+            path: "deliveryUser",
+            select: "-password"
+          },
         ]
       }
     )

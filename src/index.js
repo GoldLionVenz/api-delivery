@@ -19,7 +19,7 @@ import {
 } from "./controller"
 import makeCallBack from "./express-callback"
 import makeExpressRedirectCallBack from "./express-callback/express-redirect-callback"
-import { Auth, SuperAdmin } from "./middleware"
+import { Auth, SuperAdmin, DeliveryUser } from "./middleware"
 import fileUpload from "express-fileupload"
 const accessControlAllow = function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*")
@@ -123,7 +123,12 @@ app.post(
   SuperAdmin,
   makeCallBack(deliveryController.addDeliveryProcess)
 )
-
+app.post(
+  "/api/v1/orders/deliveryontheway",
+  DeliveryUser,
+  makeCallBack(deliveryController.deliveryOnTheWay)
+)
+app.get("/api/v1/orders/delivery", DeliveryUser, makeCallBack(orderController.getOrdersDelivery))
 //categories
 app.post("/api/v1/categories", SuperAdmin, makeCallBack(categoryController.addCategory))
 app.get("/api/v1/categories", makeCallBack(categoryController.getCategory))
