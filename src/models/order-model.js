@@ -37,6 +37,136 @@ export default function makeOrderModel({ Schema, Model, plugins }) {
       timestamps: { createdAt: "createdAt" }
     }
   )
+  orderSchema.statics.getOrders = async ({ page, limit, query, status, deliveryStatus }) => {
+    let pageToSearch = parseInt(page || 1)
+    let paginate = parseInt(limit || 50)
+    let queryMatch = {}
+    if (query) {
+      queryMatch = {
+        $or: [
+          { "user.name": { $regex: query, $options: "i" } },
+          { "user.lastName": { $regex: query, $options: "i" } },
+          { "user.email": { $regex: query, $options: "i" } },
+          { "user.document": { $regex: query, $options: "i" } },
+          { "deliveryUser.name": { $regex: query, $options: "i" } },
+          { "deliveryUser.lastName": { $regex: query, $options: "i" } },
+          { "deliveryUser.email": { $regex: query, $options: "i" } },
+          { "deliveryUser.document": { $regex: query, $options: "i" } }
+        ]
+      }
+    }
+    let statusMatch = {}
+    if (status) {
+      statusMatch = { status }
+    }
+    let deliveryMatch = {}
+    if (deliveryStatus) {
+      deliveryMatch = { deliveryStatus }
+    }
+    let orders = await Order.aggregate([
+      {
+        $match: {
+          ...statusMatch,
+          ...deliveryMatch
+        }
+      },
+      {
+        $lookup: {
+          from: "users",
+          localField: "user",
+          foreignField: "_id",
+          as: "user"
+        }
+      },
+      {
+        $unwind: {
+          path: "$user"
+        }
+      },
+      {
+        $lookup: {
+          from: "users",
+          localField: "deliveryUser",
+          foreignField: "_id",
+          as: "deliveryUser"
+        }
+      },
+      {
+        $unwind: {
+          path: "$deliveryUser",
+          preserveNullAndEmptyArrays: true
+        }
+      },
+      {
+        $match: queryMatch
+      },
+      {
+        $unwind: {
+          path: "$products"
+        }
+      },
+      {
+        $lookup: {
+          from: "products",
+          localField: "products.product",
+          foreignField: "_id",
+          as: "products.product"
+        }
+      },
+      {
+        $unwind: {
+          path: "$products.product"
+        }
+      },
+      {
+        $group: {
+          _id: "$_id",
+          products: {
+            $push: "$products"
+          },
+          doc: {
+            $first: "$$ROOT"
+          }
+        }
+      },
+      {
+        $replaceRoot: {
+          newRoot: {
+            $mergeObjects: [
+              "$doc",
+              {
+                products: "$products"
+              }
+            ]
+          }
+        }
+      },
+      {
+        $facet: {
+          docs: [
+            { $sort: { _id: -1 } },
+            { $skip: (pageToSearch - 1) * paginate },
+            { $limit: paginate }
+          ],
+          pageInfo: [{ $group: { _id: null, count: { $sum: 1 } } }]
+        }
+      }
+    ])
+
+    let total = 0
+    let docs = []
+    if (orders.length > 0 && orders[0].docs.length > 0) {
+      docs = orders[0].docs
+      total = orders[0].pageInfo[0].count
+    }
+    return {
+      docs,
+      totalDocs: total,
+      limit: paginate,
+      page: pageToSearch
+    }
+  }
   orderSchema.plugin(plugins)
-  return Model("Order", orderSchema)
+  let Order = Model("Order", orderSchema)
+  return Order
 }
