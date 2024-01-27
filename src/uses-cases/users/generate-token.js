@@ -8,7 +8,6 @@ export default function makeGenerateToken({ userModel, sendMailService }) {
     if (!token) {
       throw { message: "Error en generación de token" }
     }
-
     const user = await userModel.findOne({ email })
     if (!user) {
       throw {
@@ -27,11 +26,7 @@ export default function makeGenerateToken({ userModel, sendMailService }) {
       },
       { useFindAndModify: false }
     )
-    await sendMailService.sendMailResetPassword(
-      userToUpdate.email,
-      userToUpdate,
-      userToUpdate.token.value
-    )
+    await sendMailService.sendMailResetPassword(userToUpdate.email, userToUpdate, token.value)
     return {
       message: "Codigo de verificacion enviado correctamente"
     }

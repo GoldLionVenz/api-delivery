@@ -4,12 +4,12 @@ export default function buildMakeToken({ randomString }) {
     expirationDate = new Date(Date.now()).getTime() + 3600 * 1000
   } = {}) {
     if (!randomString.isValid(value)) {
-      throw { message: "Token value invalid" };
+      throw { message: "Token value invalid" }
     }
 
     return Object.freeze({
       value: value.toUpperCase(),
       expirationDate
-    });
-  };
+    })
+  }
 }
