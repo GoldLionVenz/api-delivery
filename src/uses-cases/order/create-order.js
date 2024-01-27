@@ -16,13 +16,14 @@ export default function makeCreateOrder({
         product: item.product
       }
     })
-
+    const totalAmountUSD = cart.totalAmount
     if (orderInfo.payment.type === "bss" || orderInfo.payment.type === "pdv") {
       cart.totalAmount = parseFloat(await getBssAmount(cart.totalAmount))
       orderInfo.currency = "VES"
     } 
     const order = await orderModel.create({
       user: user._id,
+      totalAmountUSD,
       totalAmount: cart.totalAmount,
       products: itemsOrder,
       ...orderInfo

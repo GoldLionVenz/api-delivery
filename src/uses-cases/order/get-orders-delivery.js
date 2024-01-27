@@ -10,7 +10,13 @@ export default function makeGetOrdersDelivery({ orderModel }) {
         page: orderInfo.page || 1,
         limit: orderInfo.limit || 50,
         sort: { created_at: "desc" },
-        populate: "products.product"
+        populate: [
+          { path: "products.product" },
+          {
+            path: "user",
+            select: "-password"
+          }
+        ]
       }
     )
     //.populate("products.product");
