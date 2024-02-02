@@ -14,6 +14,7 @@ export default function makeDeliveryComplete(deliverySevices) {
         body: response
       }
     } catch (e) {
+      console.log(e)
       return {
         headers,
         statusCode: 400,

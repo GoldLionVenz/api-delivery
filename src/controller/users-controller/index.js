@@ -4,6 +4,7 @@ import makeUpdateUser from "./update-user"
 import makeGenerateToken from "./generate-token"
 import makeEditUserPassword from "./edit-user-password"
 import makeGetUsers from "./get-users"
+import makeGetBalance from "./get-balance"
 import { userServices } from "../../uses-cases"
 
 const addUser = makeAddUser(userServices.addUser)
@@ -13,6 +14,7 @@ const generateToken = makeGenerateToken(userServices.generateToken)
 const editUserPassword = makeEditUserPassword(userServices.editPasswordUser)
 const addSubUser = makeAddUser(userServices.addSubUser)
 const getUsers = makeGetUsers(userServices.getUsers)
+const getBalance = makeGetBalance(userServices.getBalance)
 const userController = {
   addUser,
   loginUser,
@@ -20,6 +22,7 @@ const userController = {
   generateToken,
   editUserPassword,
   addSubUser,
-  getUsers
+  getUsers,
+  getBalance
 }
 export default userController

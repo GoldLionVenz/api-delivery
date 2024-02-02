@@ -1,12 +1,11 @@
-export default function makeEditUserPassword(editUserPasswordServices) {
-  return async function editUserPassword(httpRequest) {
+export default function makeGetBalance(getServices) {
+  return async function getBalance(httpRequest) {
     const headers = {
       "Content-Type": "application/json"
     }
     try {
-      const response = await editUserPasswordServices({
-        token: httpRequest.body.token,
-        password: httpRequest.body.password
+      const response = await getServices({
+        user: httpRequest.user
       })
 
       return {

@@ -36,8 +36,7 @@ export default function makeAddProductShoppingCart({
     cart = await shoppingCartModel
       .findOne({ user: user._id })
       .populate("items.product")
-      .populate("user");
-    console.log(cart)
+      .populate("user")
     return {
       message: "Producto agregado",
       cart: await getShoppingCartResponse(cart)

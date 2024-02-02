@@ -7,6 +7,7 @@ import isTokenValid from "./isTokenValid"
 import getBssAmount from "./get-bss-amount"
 import bufferToStream from "./buffer-to-stream"
 import DriveService from "./drive-service"
+import normalizeNumber from "./normaliize-number"
 const makeToken = buildMakeToken({ randomString })
 export {
   now,
@@ -16,5 +17,6 @@ export {
   isTokenValid,
   getBssAmount,
   bufferToStream,
-  DriveService
+  DriveService,
+  normalizeNumber
 }

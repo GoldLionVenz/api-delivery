@@ -31,7 +31,9 @@ export default function makeOrderModel({ Schema, Model, plugins }) {
       user: { type: Schema.Types.ObjectId, ref: "User" },
       totalAmountUSD: { type: Number },
       totalAmount: { type: Number, required: true },
-      status: { type: String, default: "pending" }
+      status: { type: String, default: "pending" },
+      transaction: { type: Schema.Types.ObjectId, ref: "Transaction" },
+      orderAmount: { type: Number }
     },
     {
       timestamps: { createdAt: "createdAt" }

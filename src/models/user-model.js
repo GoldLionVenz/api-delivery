@@ -10,7 +10,8 @@ export default function makeUserModel({ Schema, Model, plugins, encryptPassword 
       phoneNumber: { type: String, required: true },
       address: { type: String, required: true },
       userRoll: { type: String, required: true },
-      token: { type: Object }
+      token: { type: Object },
+      wallet: { type: Object }
     },
     {
       timestamps: { createdAt: "createdAt" }

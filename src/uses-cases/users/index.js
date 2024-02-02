@@ -10,7 +10,13 @@ import makeEditPasswordUser from "./edit-user-password"
 import { isTokenValid } from "../../helpers/"
 import makeAddSubUser from "./add-sub-user"
 import makeGetUsers from "./get-users"
-const addUser = makeAddUser({ userModel, encryptPassword: bcrypt })
+import wavesServices from "../waves"
+import makeGetBalance from "./get-balance"
+const addUser = makeAddUser({
+  userModel,
+  encryptPassword: bcrypt,
+  createWallet: wavesServices.createWallet
+})
 const loginUser = makeLoginUser({ userModel, jwt })
 const updateUser = makeUpdateUser({ userModel })
 const generateToken = makeGenerateToken({ userModel, sendMailService })
@@ -21,9 +27,11 @@ const editPasswordUser = makeEditPasswordUser({
 })
 const addSubUser = makeAddSubUser({
   userModel,
-  encryptPassword: bcrypt
+  encryptPassword: bcrypt,
+  createWallet: wavesServices.createWallet
 })
 const getUsers = makeGetUsers({ userModel })
+const getBalance = makeGetBalance({ getBalanceService: wavesServices.getBalance })
 const userServices = Object.freeze({
   addUser,
   loginUser,
@@ -31,7 +39,8 @@ const userServices = Object.freeze({
   generateToken,
   editPasswordUser,
   addSubUser,
-  getUsers
+  getUsers,
+  getBalance
 })
 
 export default userServices

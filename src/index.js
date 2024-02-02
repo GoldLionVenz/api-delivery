@@ -65,21 +65,9 @@ app.post("/api/v1/getproducts", makeCallBack(productController.getProducts))
 app.get("/api/v1/getcategories", makeCallBack(productController.getCategories))
 app.post("/api/v1/getproductspercategory", makeCallBack(productController.getProductsPerCategory))
 app.post("/api/v1/findproducts", makeCallBack(productController.findProducts))
-app.post(
-  "/api/v1/addproductshoppingcart",
-  Auth,
-  makeCallBack(shoppingCartController.addProductShoppingCart)
-)
-app.post(
-  "/api/v1/getproductshoppingcart",
-  Auth,
-  makeCallBack(shoppingCartController.getProductShoppingCart)
-)
-app.post(
-  "/api/v1/removeproductshoppingcart",
-  Auth,
-  makeCallBack(shoppingCartController.removeProductShoppingCart)
-)
+app.post("/api/v1/addproductshoppingcart", Auth, makeCallBack(shoppingCartController.addProductShoppingCart))
+app.post("/api/v1/getproductshoppingcart", Auth, makeCallBack(shoppingCartController.getProductShoppingCart))
+app.post("/api/v1/removeproductshoppingcart", Auth, makeCallBack(shoppingCartController.removeProductShoppingCart))
 app.post(
   "/api/v1/incrementproductshoppingcart",
   Auth,
@@ -90,17 +78,16 @@ app.post(
   Auth,
   makeCallBack(shoppingCartController.decrementProductShoppingCart)
 )
-app.post(
-  "/api/v1/cleanshoppingcart",
-  Auth,
-  makeCallBack(shoppingCartController.cleanProductShoppingCart)
-)
+app.post("/api/v1/cleanshoppingcart", Auth, makeCallBack(shoppingCartController.cleanProductShoppingCart))
 app.post("/api/v1/createorder", Auth, makeCallBack(orderController.createOrder))
 app.get("/api/v1/getorder/:_id", Auth, makeCallBack(orderController.getOrder))
 app.get("/api/v1/getorders", Auth, makeCallBack(orderController.getOrders))
 app.post("/api/v1/paypalredit", Auth, makeCallBack(orderController.checkOrderStatus))
 app.post("/api/v1/generatetoken", makeCallBack(userController.generateToken))
 app.post("/api/v1/editpassword", makeCallBack(userController.editUserPassword))
+
+//users
+app.get("/api/v1/users/balance", Auth, makeCallBack(userController.getBalance))
 
 //dolarprice
 app.get("/api/v1/dolarprice", makeCallBack(dolarPriceController.getDolar))
@@ -118,16 +105,8 @@ app.post("/api/v1/products/addproductandimg", makeCallBack(productController.add
 app.post("/api/v1/admin/subuser", SuperAdmin, makeCallBack(userController.addSubUser))
 app.get("/api/v1/admin/users", SuperAdmin, makeCallBack(userController.getUsers))
 //delivery
-app.post(
-  "/api/v1/orders/assigneddelivery",
-  SuperAdmin,
-  makeCallBack(deliveryController.addDeliveryProcess)
-)
-app.post(
-  "/api/v1/orders/deliveryontheway",
-  DeliveryUser,
-  makeCallBack(deliveryController.deliveryOnTheWay)
-)
+app.post("/api/v1/orders/assigneddelivery", SuperAdmin, makeCallBack(deliveryController.addDeliveryProcess))
+app.post("/api/v1/orders/deliveryontheway", DeliveryUser, makeCallBack(deliveryController.deliveryOnTheWay))
 app.get("/api/v1/orders/delivery", DeliveryUser, makeCallBack(orderController.getOrdersDelivery))
 app.get("/api/v1/orders/completed", Auth, makeCallBack(deliveryController.deliveryComplete))
 //categories
