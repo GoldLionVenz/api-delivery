@@ -14,7 +14,7 @@ export default function makeGetOrdersDelivery({ orderModel }) {
           { path: "products.product" },
           {
             path: "user",
-            select: "-password"
+            select: "-password -wallet"
           }
         ]
       }

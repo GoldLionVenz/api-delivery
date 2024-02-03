@@ -19,7 +19,7 @@ export default function makeUserModel({ Schema, Model, plugins, encryptPassword 
   )
   UserSchema.statics.findByCredentials = async (email, password) => {
     // Search for a user by email and password.
-    let user = await User.findOne({ email })
+    let user = await User.findOne({ email }).select("-wallet")
     if (!user) {
       throw { message: "Invalid login credentials" }
     }

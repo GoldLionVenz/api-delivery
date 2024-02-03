@@ -14,7 +14,7 @@ export default function makeAddUser({ userModel, encryptPassword, createWallet }
       userRoll: "user",
       wallet
     })
-
+    delete user.wallet
     return {
       message: "Okey",
       user

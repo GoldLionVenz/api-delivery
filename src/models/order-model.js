@@ -100,6 +100,12 @@ export default function makeOrderModel({ Schema, Model, plugins }) {
         }
       },
       {
+        $proyect: {
+          "user.wallet": 0,
+          "deliveryUser.wallet": 0
+        }
+      },
+      {
         $match: queryMatch
       },
       {

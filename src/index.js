@@ -97,7 +97,7 @@ app.post("/api/v1/dolarprice", SuperAdmin, makeCallBack(dolarPriceController.put
 app.post("/api/v1/orders/approved", SuperAdmin, makeCallBack(orderController.approveOrder))
 app.post("/api/v1/orders/reject", SuperAdmin, makeCallBack(orderController.rejectOrder))
 app.get("/api/v1/orders/admin", SuperAdmin, makeCallBack(orderController.getOrdersAdmin))
-
+app.post("/api/v1/orders/tokens", SuperAdmin, makeCallBack(orderController.sendTokens))
 //products
 app.post("/api/v1/products/addproductandimg", makeCallBack(productController.addProductAndImg))
 

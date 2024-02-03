@@ -5,6 +5,7 @@ import makeGetOrders from "./get-orders"
 import { orderServices } from "../../uses-cases"
 import makeApproveOrder from "./approve-order"
 import makeRejectOrder from "./reject-order"
+import makeSendTokens from "./send-tokens"
 const createOrder = makeCreateOrder(orderServices.createOrder)
 const checkOrderStatus = makeCheckOrderStatus(orderServices.checkOrderStatus)
 const getOrder = makeGetOrder(orderServices.getOrder)
@@ -13,6 +14,7 @@ const getOrdersAdmin = makeGetOrders(orderServices.getOrdersAdmin)
 const getOrdersDelivery = makeGetOrders(orderServices.getOrdersDelivery)
 const approveOrder = makeApproveOrder(orderServices.approveOrder)
 const rejectOrder = makeRejectOrder(orderServices.rejectOrder)
+const sendTokens = makeSendTokens(orderServices.sendTokens)
 const orderController = {
   createOrder,
   checkOrderStatus,
@@ -21,7 +23,8 @@ const orderController = {
   approveOrder,
   rejectOrder,
   getOrdersAdmin,
-  getOrdersDelivery
+  getOrdersDelivery,
+  sendTokens
 }
 
 export default orderController
