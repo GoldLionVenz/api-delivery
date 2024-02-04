@@ -100,7 +100,7 @@ export default function makeOrderModel({ Schema, Model, plugins }) {
         }
       },
       {
-        $proyect: {
+        $project: {
           "user.wallet": 0,
           "deliveryUser.wallet": 0
         }
