@@ -3,7 +3,7 @@ export default function makeUserModel({ Schema, Model, plugins, encryptPassword 
     {
       name: { type: String, required: true },
       lastName: { type: String, required: true },
-      userName: { type: String, required: true },
+      userName: { type: String, required: true, unique: true, },
       email: { type: String, required: true, unique: true, lowercase: true },
       document: { type: String, required: true },
       password: { type: String, required: true, minLength: 7 },

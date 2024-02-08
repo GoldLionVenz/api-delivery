@@ -6,6 +6,7 @@ import deliveryServices from "./delivery"
 import dolarPriceServices from "./dolar-price"
 import categoryServices from "./category"
 import wavesServices from "./waves"
+import transactionService from "./transactions"
 export {
   userServices,
   productServices,
@@ -14,5 +15,6 @@ export {
   deliveryServices,
   dolarPriceServices,
   categoryServices,
-  wavesServices
+  wavesServices,
+  transactionService
 }

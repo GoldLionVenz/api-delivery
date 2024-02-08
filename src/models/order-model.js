@@ -25,6 +25,7 @@ export default function makeOrderModel({ Schema, Model, plugins }) {
         document: { type: String },
         address: { type: String }
       },
+      currency: { type: String, default: "USD" },
       shipping: { type: Object },
       deliveryStatus: { type: String },
       deliveryUser: { type: Schema.Types.ObjectId, ref: "User" },

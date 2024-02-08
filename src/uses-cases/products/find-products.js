@@ -9,8 +9,8 @@ export default function makeFindProducts({ productModel, getBssAmount }) {
         ]
       },
       {
-        page: productsInfo.page,
-        limit: productsInfo.limit,
+        page: productsInfo.page || 1,
+        limit: productsInfo.limit || 10,
         sort: { created_at: "desc" },
         populate: "category"
       }
