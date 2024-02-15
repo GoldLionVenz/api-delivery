@@ -10,6 +10,7 @@ export default function makeUserModel({ Schema, Model, plugins, encryptPassword 
       phoneNumber: { type: String, required: true },
       address: { type: String, required: true },
       userRoll: { type: String, required: true },
+      status: { type: Boolean, default: true },
       token: { type: Object },
       wallet: { type: Object }
     },
@@ -40,6 +41,64 @@ export default function makeUserModel({ Schema, Model, plugins, encryptPassword 
     const user = await User.findOne({ userName: userName })
     if (user) return true
     else return false
+  }
+  UserSchema.statics.getUsers = async ({ page, limit, ...usersInfo }) => {
+    console.log(usersInfo)
+    let pageToSearch = parseInt(page || 1)
+    let paginate = parseInt(limit || 50)
+    let filter = {}
+    let filterQuery = {}
+    if (usersInfo.query) {
+      filterQuery = {
+        $or: [
+          { lastName: { $regex: usersInfo.query, $options: "i" } },
+          { name: { $regex: usersInfo.query, $options: "i" } }
+        ]
+      }
+    }
+    if (usersInfo.roll) {
+      filter.userRoll = usersInfo.roll
+    }
+    if (usersInfo.status) {
+      filter.status = (/true/).test(usersInfo.status)
+    }
+    let users = await User.aggregate([
+      {
+        $match: {
+          ...filter,
+          ...filterQuery
+        }
+      },
+      {
+        $project: {
+          password: 0,
+          wallet: 0
+        }
+      },
+      {
+        $facet: {
+          docs: [
+            { $sort: { _id: -1 } },
+            { $skip: (pageToSearch - 1) * paginate },
+            { $limit: paginate }
+          ],
+          pageInfo: [{ $group: { _id: null, count: { $sum: 1 } } }]
+        }
+      }
+    ])
+
+    let total = 0
+    let docs = []
+    if (users.length > 0 && users[0].docs.length > 0) {
+      docs = users[0].docs
+      total = users[0].pageInfo[0].count
+    }
+    return {
+      docs,
+      totalDocs: total,
+      limit: paginate,
+      page: pageToSearch
+    }
   }
   UserSchema.plugin(plugins)
   const User = Model("User", UserSchema)

@@ -4,7 +4,7 @@ export default function makeGetTransactions(getService) {
       "Content-Type": "application/json"
     }
     try {
-      const transactionsInfo = httpRequest.body
+      const transactionsInfo = httpRequest.query
       const response = await getService({
         user: httpRequest.user,
         ...transactionsInfo
