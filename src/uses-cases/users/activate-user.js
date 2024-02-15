@@ -4,7 +4,7 @@ export default function makeActivateUser({ userModel }) {
       { _id: userInfo._id },
       {
         $set: {
-          isActive: userInfo.status
+          ...userInfo
         }
       }
     )
