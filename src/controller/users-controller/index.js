@@ -15,6 +15,7 @@ const editUserPassword = makeEditUserPassword(userServices.editPasswordUser)
 const addSubUser = makeAddUser(userServices.addSubUser)
 const getUsers = makeGetUsers(userServices.getUsers)
 const getBalance = makeGetBalance(userServices.getBalance)
+const activateUser = makeUpdateUser(userServices.activateUser)
 const userController = {
   addUser,
   loginUser,
@@ -23,6 +24,7 @@ const userController = {
   editUserPassword,
   addSubUser,
   getUsers,
-  getBalance
+  getBalance,
+  activateUser
 }
 export default userController

@@ -11,6 +11,9 @@ export default function makeOrderModel({ Schema, Model, plugins }) {
             quantity: {
               type: Number,
               default: 1
+            },
+            priceInOrder: {
+              type: Number
             }
           }
         ],

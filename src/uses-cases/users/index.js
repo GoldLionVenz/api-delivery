@@ -12,6 +12,7 @@ import makeAddSubUser from "./add-sub-user"
 import makeGetUsers from "./get-users"
 import wavesServices from "../waves"
 import makeGetBalance from "./get-balance"
+import makeActivateUser from "./activate-user"
 const addUser = makeAddUser({
   userModel,
   encryptPassword: bcrypt,
@@ -32,6 +33,7 @@ const addSubUser = makeAddSubUser({
 })
 const getUsers = makeGetUsers({ userModel })
 const getBalance = makeGetBalance({ getBalanceService: wavesServices.getBalance })
+const activateUser = makeActivateUser({ userModel })
 const userServices = Object.freeze({
   addUser,
   loginUser,
@@ -40,7 +42,8 @@ const userServices = Object.freeze({
   editPasswordUser,
   addSubUser,
   getUsers,
-  getBalance
+  getBalance,
+  activateUser
 })
 
 export default userServices

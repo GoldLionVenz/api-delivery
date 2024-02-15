@@ -16,6 +16,7 @@ export default function makeCreateOrder({
     const itemsOrder = cart.items.map((item) => {
       return {
         quantity: item.quantity,
+        priceInOrder: item.product.price,
         product: item.product
       }
     })
